@@ -1,0 +1,14 @@
+spring.application.name: gateway
+eureka.client.service-url.default-zone: http://localhost:8761/eureka
+spring.jackson.default-property-inclusion: NON_NULL
+spring.profiles.default: debug
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: sample API
+          uri: "lb://sample"
+          predicates:
+            - Path=/sample/**
+

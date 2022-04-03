@@ -1,0 +1,8 @@
+spring.cloud.gateway.httpserver.wiretap: true
+spring.cloud.gateway.httpclient.wiretap: true
+logging.level.reactor.netty: debug
+logging.level.com.roytuts.spring.boot.cloud.gateway: debug
+logging.level.reactor.netty.channel.FluxReceive: trace
+logging.file.name: log/application.log
+#logging.file.path: /opt/log
+management.endpoints.web.exposure.include: '*'
