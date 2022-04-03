@@ -17,5 +17,9 @@ find */build/libs/ -type f -name "*.jar"|grep -v plain|while read f ; do java -j
 curl -v http://localhost:8080/sample/sample   
 ```
 
-## Links:
-Tutorial: https://roytuts.com/spring-cloud-gateway-security-with-jwt-json-web-token/
+## Check httptrace
+```
+url -s http://localhost:8080/actuator/httptrace | jq '.traces |.[0] | .'
+```
+
+
