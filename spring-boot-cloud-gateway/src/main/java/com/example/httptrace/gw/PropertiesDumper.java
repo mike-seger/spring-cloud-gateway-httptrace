@@ -138,10 +138,10 @@ public class PropertiesDumper {
             JsonGenerator delegate = jsonFactory.createGenerator(baos, JsonEncoding.UTF8);
             SyntaxHighlighter highlighter = DefaultSyntaxHighlighter
                 .newBuilder()
-                .withField(AnsiSyntaxHighlightIntense.BLUE)
+                .withField(AnsiSyntaxHighlight.BLUE)
                 .withString(AnsiSyntaxHighlightIntense.YELLOW)
-                .withNumber(AnsiSyntaxHighlight.MAGENTA)
-                .withCurlyBrackets(AnsiSyntaxHighlight.CYAN)
+                .withNumber(AnsiSyntaxHighlight.BLUE)
+                .withCurlyBrackets(AnsiSyntaxHighlight.MAGENTA)
                 .withComma(AnsiSyntaxHighlight.WHITE)
                 .withColon(AnsiSyntaxHighlight.WHITE)
                 .build();
