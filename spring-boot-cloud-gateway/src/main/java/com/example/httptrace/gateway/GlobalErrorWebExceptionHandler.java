@@ -27,7 +27,7 @@ public class GlobalErrorWebExceptionHandler extends
 			ApplicationContext applicationContext,
 			ServerCodecConfigurer configurer) {
 		super(errorAttributes, webProperties.getResources(), applicationContext);
-		this.setMessageWriters(configurer.getWriters());
+		setMessageWriters(configurer.getWriters());
 	}
 
 	@Override
