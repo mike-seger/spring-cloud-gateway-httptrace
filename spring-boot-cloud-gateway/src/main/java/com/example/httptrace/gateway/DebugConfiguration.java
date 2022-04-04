@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Profile("debug")
+@SuppressWarnings("unused")
 public class DebugConfiguration {
 	@Bean
 	public HttpTraceRepository htttpTraceRepository() {

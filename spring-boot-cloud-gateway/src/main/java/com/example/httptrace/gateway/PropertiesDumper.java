@@ -22,7 +22,6 @@ import java.util.*;
 
 @Configuration
 @SuppressWarnings("unused")
-
 public class PropertiesDumper {
     private static final Logger logger = LoggerFactory.getLogger(PropertiesDumper.class);
     private final static int debugValueLength = 40;

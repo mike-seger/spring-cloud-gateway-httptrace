@@ -16,9 +16,9 @@ import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
-@SuppressWarnings("unused")
 @Component
 @Order(-2)
+@SuppressWarnings("unused")
 public class GlobalErrorWebExceptionHandler extends
 		AbstractErrorWebExceptionHandler {
 
