@@ -1,4 +1,4 @@
-package com.roytuts.spring.boot.microservice.sample;
+package com.example.httptrace.microservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

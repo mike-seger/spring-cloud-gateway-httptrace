@@ -1,4 +1,4 @@
-package com.example.httptrace.gw;
+package com.example.httptrace.gateway;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -21,6 +21,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.*;
 
 @Configuration
+@SuppressWarnings("unused")
+
 public class PropertiesDumper {
     private static final Logger logger = LoggerFactory.getLogger(PropertiesDumper.class);
     private final static int debugValueLength = 40;
@@ -61,10 +63,10 @@ public class PropertiesDumper {
                             try {
                                 value = toJson(environment.getProperty(key, Object.class), true);
                             } catch (Exception e2) {
-                                value = "[Unconvertable value]";
+                                value = "[Inconvertible value]";
                             }
                         }
-                        if (key.toLowerCase().endsWith("path") && value.length() > debugValueLength && !logger.isTraceEnabled()) {
+                        if (key.toLowerCase().endsWith("path") && Objects.requireNonNull(value).length() > debugValueLength && !logger.isTraceEnabled()) {
                             value = value.substring(0, debugValueLength) + "...";
                         }
                         resolvedProperties.put(key, value);
@@ -85,7 +87,7 @@ public class PropertiesDumper {
             String sourceName = entry.getKey();
             if (source instanceof EnumerablePropertySource) {
                 EnumerablePropertySource<?> enumerable = (EnumerablePropertySource<?>) source;
-                Map<String, Object> properties = new TreeMap<String, Object>();
+                Map<String, Object> properties = new TreeMap<>();
                 for (String name : enumerable.getPropertyNames()) {
                     try {
                         properties.put(name, sanitize(name, enumerable.getProperty(name)));
@@ -101,8 +103,8 @@ public class PropertiesDumper {
     }
 
     private Map<String, PropertySource<?>> getPropertySources() {
-        Map<String, PropertySource<?>> map = new LinkedHashMap<String, PropertySource<?>>();
-        MutablePropertySources sources = null;
+        Map<String, PropertySource<?>> map = new LinkedHashMap<>();
+        MutablePropertySources sources;
         if (environment != null) {
             sources = environment.getPropertySources();
         } else {
@@ -134,8 +136,8 @@ public class PropertiesDumper {
                 return om.writeValueAsString(o);
             }
             JsonFactory jsonFactory = new JsonFactory();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            JsonGenerator delegate = jsonFactory.createGenerator(baos, JsonEncoding.UTF8);
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            JsonGenerator delegate = jsonFactory.createGenerator(os, JsonEncoding.UTF8);
             SyntaxHighlighter highlighter = DefaultSyntaxHighlighter
                 .newBuilder()
                 .withField(AnsiSyntaxHighlight.BLUE)
@@ -148,8 +150,8 @@ public class PropertiesDumper {
             try (JsonGenerator jsonGenerator = new SyntaxHighlightingJsonGenerator(delegate, highlighter, true)) {
                 jsonGenerator.setCodec(om);
                 jsonGenerator.writeObject(o);
-                baos.write(AnsiSyntaxHighlight.RESET.getBytes());
-                return baos.toString();
+                os.write(AnsiSyntaxHighlight.RESET.getBytes());
+                return os.toString();
             } catch(Exception e) {
                 return om.writerWithDefaultPrettyPrinter().writeValueAsString(o);
             }
@@ -159,6 +161,7 @@ public class PropertiesDumper {
         }
     }
 
+    @SuppressWarnings("unused")
     private static final class AnsiSyntaxHighlightIntense {
         public static final String BLACK	= "90";
         public static final String RED	    = "91";

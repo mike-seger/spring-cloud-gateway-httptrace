@@ -1,4 +1,4 @@
-package com.example.httptrace.gw;
+package com.example.httptrace.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
